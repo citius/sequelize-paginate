@@ -1,6 +1,9 @@
 import { FindOptions, Model } from 'sequelize'
 
-export class SequelizePaginate<TInstance, TAttributes> {
+export class SequelizePaginate<
+  TInstance extends { excludeCountOptions: string[] },
+  TAttributes
+> {
   public paginate (Model: Model<TInstance, TAttributes>): void
 }
 
@@ -17,9 +20,10 @@ export interface PaginateResult<TAttributes> {
   page: number
 }
 
-export function paginate<TInstance, TAttributes> (
-  Model: Model<TInstance, TAttributes>
-): void
+export function paginate<
+  TInstance extends { excludeCountOptions: string[] },
+  TAttributes
+> (Model: Model<TInstance, TAttributes>): void
 export function pagination<T, TAttributes> (
   params: FindOptions & Paginate
 ): Promise<TAttributes>
